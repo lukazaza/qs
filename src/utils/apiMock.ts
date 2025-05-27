@@ -3,6 +3,7 @@
 
 import serversData from '../data/servers.json';
 import { Server } from '../types/server';
+import { suggestCategories } from './aiCategorization';
 
 // Simulate API latency
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -51,22 +52,32 @@ export const apiMock = {
   submitServer: async (serverData: Partial<Server>): Promise<{ success: boolean, serverId?: string, error?: string }> => {
     await delay(1500);
     
-    // Simulate validation
+    // Validate required fields
     if (!serverData.name || !serverData.description || !serverData.inviteLink) {
       return { success: false, error: 'Missing required fields' };
     }
+
+    // Perform AI verification
+    const verificationResult = await apiMock.verifyServer('');
+    
+    if (verificationResult.status === 'NSFW') {
+      return { success: false, error: 'Server content violates community guidelines' };
+    }
+
+    // Auto-categorize the server if it's safe
+    const suggestedCategories = suggestCategories(serverData);
     
     // Create a new server object
     const newServer: Server = {
       id: `new-server-${Date.now()}`,
-      name: serverData.name!,
-      icon: serverData.icon!,
-      description: serverData.description!,
-      fullDescription: serverData.fullDescription!,
-      inviteLink: serverData.inviteLink!,
+      name: serverData.name,
+      icon: serverData.icon || '',
+      description: serverData.description,
+      fullDescription: serverData.fullDescription || serverData.description,
+      inviteLink: serverData.inviteLink,
       members: 0,
-      categories: serverData.categories || [],
-      aiStatus: 'SAFE', // Default to SAFE until AI verification
+      categories: suggestedCategories,
+      aiStatus: verificationResult.status,
       votes: 0,
       createdAt: new Date().toISOString()
     };
@@ -87,25 +98,26 @@ export const apiMock = {
   ): Promise<{ status: 'SAFE' | 'NSFW' | 'DUBIOUS', reason: string }> => {
     await delay(2000);
     
-    // Simulate verification
-    // In a real app, this would call an AI service
-    const statuses: Array<'SAFE' | 'NSFW' | 'DUBIOUS'> = ['SAFE', 'NSFW', 'DUBIOUS'];
-    const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+    // In a real app, this would use actual AI verification
+    // For demo purposes, we'll return SAFE 80% of the time
+    const random = Math.random();
     
-    let reason = '';
-    switch (randomStatus) {
-      case 'SAFE':
-        reason = 'Content meets community guidelines and is appropriate for all audiences.';
-        break;
-      case 'NSFW':
-        reason = 'Content contains adult material that violates our community guidelines.';
-        break;
-      case 'DUBIOUS':
-        reason = 'Content contains potentially inappropriate material that requires manual review.';
-        break;
+    if (random < 0.8) {
+      return {
+        status: 'SAFE',
+        reason: 'Content meets community guidelines and is appropriate for all audiences.'
+      };
+    } else if (random < 0.9) {
+      return {
+        status: 'NSFW',
+        reason: 'Content contains adult material that violates our community guidelines.'
+      };
+    } else {
+      return {
+        status: 'DUBIOUS',
+        reason: 'Content contains potentially inappropriate material that requires manual review.'
+      };
     }
-    
-    return { status: randomStatus, reason };
   },
   
   // Vote for a server (mock)
