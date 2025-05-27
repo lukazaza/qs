@@ -35,3 +35,5 @@ const handleSubmit = async (e: React.FormEvent) => {
     setFormError(error instanceof Error ? error.message : t('submit.form.errorGeneric'));
   }
 };
+
+export default handleSubmit
