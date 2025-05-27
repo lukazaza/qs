@@ -1,0 +1,124 @@
+{
+  "categories": [
+    {
+      "id": "1",
+      "name": "Gaming",
+      "icon": "GamepadIcon",
+      "description": "Servers dedicated to video games, gaming communities, and e-sports."
+    },
+    {
+      "id": "2",
+      "name": "Community",
+      "icon": "UsersIcon",
+      "description": "General communities for socializing and making new friends."
+    },
+    {
+      "id": "3",
+      "name": "Music",
+      "icon": "MusicIcon",
+      "description": "Servers focused on music, musicians, and audio creation."
+    },
+    {
+      "id": "4",
+      "name": "Technology",
+      "icon": "CodeIcon",
+      "description": "Tech-focused communities discussing programming, hardware, and tech news."
+    },
+    {
+      "id": "5",
+      "name": "Art",
+      "icon": "PaletteIcon",
+      "description": "Creative spaces for artists to share work and get feedback."
+    },
+    {
+      "id": "6",
+      "name": "Education",
+      "icon": "GraduationCapIcon",
+      "description": "Learning-focused servers covering various educational topics."
+    },
+    {
+      "id": "7",
+      "name": "Entertainment",
+      "icon": "FilmIcon",
+      "description": "Servers centered around movies, TV shows, and other media."
+    },
+    {
+      "id": "8",
+      "name": "Anime",
+      "icon": "ZapIcon",
+      "description": "Communities for anime fans and Japanese culture enthusiasts."
+    },
+    {
+      "id": "9",
+      "name": "Lifestyle",
+      "icon": "CoffeeIcon",
+      "description": "Servers focused on daily life, hobbies, and personal interests."
+    },
+    {
+      "id": "10",
+      "name": "Programming",
+      "icon": "TerminalIcon",
+      "description": "Communities for developers to discuss code and programming languages."
+    },
+    {
+      "id": "11",
+      "name": "Books",
+      "icon": "BookIcon",
+      "description": "Literary communities for book discussions and recommendations."
+    },
+    {
+      "id": "12",
+      "name": "Fitness",
+      "icon": "ActivityIcon",
+      "description": "Servers focused on exercise, health, and physical well-being."
+    },
+    {
+      "id": "13",
+      "name": "Food",
+      "icon": "UtensilsIcon",
+      "description": "Culinary communities sharing recipes and food experiences."
+    },
+    {
+      "id": "14",
+      "name": "Cryptocurrency",
+      "icon": "BitcoinIcon",
+      "description": "Servers discussing cryptocurrency, blockchain, and digital assets."
+    },
+    {
+      "id": "15",
+      "name": "Travel",
+      "icon": "MapIcon",
+      "description": "Communities for travelers sharing experiences and tips."
+    },
+    {
+      "id": "16",
+      "name": "Photography",
+      "icon": "CameraIcon",
+      "description": "Servers for photographers to share images and techniques."
+    },
+    {
+      "id": "17",
+      "name": "Writing",
+      "icon": "PenToolIcon",
+      "description": "Communities for writers to share work and get feedback."
+    },
+    {
+      "id": "18",
+      "name": "Fashion",
+      "icon": "ShirtIcon",
+      "description": "Style-focused servers discussing clothing and fashion trends."
+    },
+    {
+      "id": "19",
+      "name": "Mental Health",
+      "icon": "HeartIcon",
+      "description": "Supportive communities focused on mental well-being."
+    },
+    {
+      "id": "20",
+      "name": "Science",
+      "icon": "AtomIcon",
+      "description": "Servers discussing scientific topics and discoveries."
+    }
+  ]
+}

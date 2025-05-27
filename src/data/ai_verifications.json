@@ -1,0 +1,55 @@
+{
+  "verifications": [
+    {
+      "id": "1",
+      "serverId": "1",
+      "status": "SAFE",
+      "reason": "Content meets community guidelines."
+    },
+    {
+      "id": "2",
+      "serverId": "2",
+      "status": "SAFE",
+      "reason": "Content meets community guidelines."
+    },
+    {
+      "id": "3",
+      "serverId": "3",
+      "status": "SAFE",
+      "reason": "Content meets community guidelines."
+    },
+    {
+      "id": "4",
+      "serverId": "4",
+      "status": "SAFE",
+      "reason": "Content meets community guidelines."
+    },
+    {
+      "id": "5",
+      "serverId": "5",
+      "status": "SAFE",
+      "reason": "Content meets community guidelines."
+    },
+    {
+      "id": "6",
+      "serverId": "rejected-1",
+      "status": "NSFW",
+      "reason": "Contains adult content that violates community guidelines.",
+      "text": "This server contains explicit adult content that is not appropriate for all audiences."
+    },
+    {
+      "id": "7",
+      "serverId": "rejected-2",
+      "status": "NSFW",
+      "reason": "Contains offensive language and harmful content.",
+      "text": "This server contains language that promotes discrimination and harmful behavior."
+    },
+    {
+      "id": "8",
+      "serverId": "dubious-1",
+      "status": "DUBIOUS",
+      "reason": "Contains borderline content that may be inappropriate.",
+      "text": "This server contains content that may be inappropriate for some audiences."
+    }
+  ]
+}
