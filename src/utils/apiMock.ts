@@ -56,10 +56,28 @@ export const apiMock = {
       return { success: false, error: 'Missing required fields' };
     }
     
-    // Simulate success
+    // Create a new server object
+    const newServer: Server = {
+      id: `new-server-${Date.now()}`,
+      name: serverData.name!,
+      icon: serverData.icon!,
+      description: serverData.description!,
+      fullDescription: serverData.fullDescription!,
+      inviteLink: serverData.inviteLink!,
+      members: 0,
+      categories: serverData.categories || [],
+      aiStatus: 'SAFE', // Default to SAFE until AI verification
+      votes: 0,
+      createdAt: new Date().toISOString()
+    };
+    
+    // In a real app, this would be added to the database
+    // For now, we'll add it to our mock data
+    serversData.servers.push(newServer);
+    
     return { 
       success: true, 
-      serverId: 'new-server-123' 
+      serverId: newServer.id 
     };
   },
   

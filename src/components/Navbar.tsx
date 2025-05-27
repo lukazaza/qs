@@ -3,9 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Zap, Search, Trophy, PlusCircle, Menu, X, LogIn, LogOut, User } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 import AuthModal from './AuthModal';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar: React.FC = () => {
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -40,9 +43,9 @@ const Navbar: React.FC = () => {
   };
 
   const navLinks = [
-    { to: '/ranked', text: 'Ranked', icon: <Trophy size={20} className="mr-2" /> },
-    { to: '/search', text: 'Search', icon: <Search size={20} className="mr-2" /> },
-    { to: '/submit', text: 'Add Server', icon: <PlusCircle size={20} className="mr-2" /> }
+    { to: '/ranked', text: t('nav.ranked'), icon: <Trophy size={20} className="mr-2" /> },
+    { to: '/search', text: t('nav.search'), icon: <Search size={20} className="mr-2" /> },
+    { to: '/submit', text: t('nav.addServer'), icon: <PlusCircle size={20} className="mr-2" /> }
   ];
 
   const handleSignOut = async () => {
@@ -106,6 +109,7 @@ const Navbar: React.FC = () => {
                 Sign In
               </button>
             )}
+            <LanguageSwitcher />
           </div>
           
           {/* Mobile Menu Button */}
