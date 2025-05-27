@@ -1,6 +1,3 @@
-// This file simulates API calls in a real application
-// In a production app, these would be actual API requests
-
 import serversData from '../data/servers.json';
 import { Server } from '../types/server';
 import { suggestCategories } from './aiCategorization';
@@ -8,19 +5,28 @@ import { suggestCategories } from './aiCategorization';
 // Simulate API latency
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
+// Store submitted servers in memory (in a real app, this would be in a database)
+const submittedServers = new Map<string, Server>();
+
 // Mock API service
 export const apiMock = {
   // Get all servers
   getServers: async (): Promise<Server[]> => {
     await delay(800);
-    return serversData.servers;
+    // Include submitted servers in the results
+    return [...serversData.servers, ...Array.from(submittedServers.values())];
   },
   
   // Get server by ID
   getServerById: async (id: string): Promise<Server | null> => {
     await delay(500);
-    const server = serversData.servers.find(s => s.id === id);
-    return server || null;
+    // Check submitted servers first
+    const submittedServer = submittedServers.get(id);
+    if (submittedServer) {
+      return submittedServer;
+    }
+    // Then check original servers
+    return serversData.servers.find(s => s.id === id) || null;
   },
   
   // Search servers
@@ -31,7 +37,10 @@ export const apiMock = {
   ): Promise<Server[]> => {
     await delay(600);
     
-    return serversData.servers.filter(server => {
+    // Combine original and submitted servers
+    const allServers = [...serversData.servers, ...Array.from(submittedServers.values())];
+    
+    return allServers.filter(server => {
       // Match query
       const matchesQuery = !query || 
         server.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -48,7 +57,7 @@ export const apiMock = {
     });
   },
   
-  // Submit server (mock)
+  // Submit server
   submitServer: async (serverData: Partial<Server>): Promise<{ success: boolean, serverId?: string, error?: string }> => {
     await delay(1500);
     
@@ -56,22 +65,23 @@ export const apiMock = {
     if (!serverData.name || !serverData.description || !serverData.inviteLink) {
       return { success: false, error: 'Missing required fields' };
     }
-
+    
     // Perform AI verification
     const verificationResult = await apiMock.verifyServer('');
     
     if (verificationResult.status === 'NSFW') {
       return { success: false, error: 'Server content violates community guidelines' };
     }
-
-    // Auto-categorize the server if it's safe
+    
+    // Auto-categorize the server
     const suggestedCategories = suggestCategories(serverData);
     
-    // Create a new server object
+    // Create a new server object with a unique ID
+    const newServerId = `new-server-${Date.now()}`;
     const newServer: Server = {
-      id: `new-server-${Date.now()}`,
+      id: newServerId,
       name: serverData.name,
-      icon: serverData.icon || '',
+      icon: serverData.icon || 'https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg',
       description: serverData.description,
       fullDescription: serverData.fullDescription || serverData.description,
       inviteLink: serverData.inviteLink,
@@ -82,58 +92,52 @@ export const apiMock = {
       createdAt: new Date().toISOString()
     };
     
-    // In a real app, this would be added to the database
-    // For now, we'll add it to our mock data
-    serversData.servers.push(newServer);
+    // Store the new server
+    submittedServers.set(newServerId, newServer);
     
     return { 
       success: true, 
-      serverId: newServer.id 
+      serverId: newServerId
     };
   },
   
-  // Verify server with AI (mock)
+  // Verify server with AI
   verifyServer: async (
     serverId: string
   ): Promise<{ status: 'SAFE' | 'NSFW' | 'DUBIOUS', reason: string }> => {
     await delay(2000);
     
-    // In a real app, this would use actual AI verification
-    // For demo purposes, we'll return SAFE 80% of the time
-    const random = Math.random();
-    
-    if (random < 0.8) {
-      return {
-        status: 'SAFE',
-        reason: 'Content meets community guidelines and is appropriate for all audiences.'
-      };
-    } else if (random < 0.9) {
-      return {
-        status: 'NSFW',
-        reason: 'Content contains adult material that violates our community guidelines.'
-      };
-    } else {
-      return {
-        status: 'DUBIOUS',
-        reason: 'Content contains potentially inappropriate material that requires manual review.'
-      };
-    }
+    // For demo purposes, we'll return SAFE by default
+    return {
+      status: 'SAFE',
+      reason: 'Content meets community guidelines and is appropriate for all audiences.'
+    };
   },
   
-  // Vote for a server (mock)
+  // Vote for a server
   voteForServer: async (serverId: string): Promise<{ success: boolean, newVoteCount?: number }> => {
     await delay(300);
     
-    // Find server
+    // Check submitted servers first
+    const submittedServer = submittedServers.get(serverId);
+    if (submittedServer) {
+      submittedServer.votes += 1;
+      return { 
+        success: true, 
+        newVoteCount: submittedServer.votes 
+      };
+    }
+    
+    // Then check original servers
     const server = serversData.servers.find(s => s.id === serverId);
     if (!server) {
       return { success: false };
     }
     
-    // Simulate vote increment
+    server.votes += 1;
     return { 
       success: true, 
-      newVoteCount: server.votes + 1 
+      newVoteCount: server.votes 
     };
   }
 };
