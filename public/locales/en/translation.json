@@ -1,0 +1,30 @@
+{
+  "nav": {
+    "ranked": "Ranked",
+    "search": "Search",
+    "addServer": "Add Server",
+    "signIn": "Sign In",
+    "signOut": "Sign Out"
+  },
+  "home": {
+    "hero": {
+      "title": "Find your perfect Discord community",
+      "subtitle": "Explore top-ranked Discord servers, connect with like-minded people, and join thriving communities in gaming, art, music, and more.",
+      "viewTopServers": "View Top Servers",
+      "searchServers": "Search Servers"
+    }
+  },
+  "submit": {
+    "title": "Submit Your Server",
+    "description": "Add your Discord server to our growing list and get more members. All submissions are automatically verified by our AI system.",
+    "form": {
+      "serverName": "Server Name",
+      "serverIcon": "Server Icon URL",
+      "inviteLink": "Discord Invite Link",
+      "shortDescription": "Short Description",
+      "fullDescription": "Full Description",
+      "categories": "Categories",
+      "submit": "Submit Server"
+    }
+  }
+}

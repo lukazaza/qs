@@ -1,0 +1,30 @@
+{
+  "nav": {
+    "ranked": "Classement",
+    "search": "Rechercher",
+    "addServer": "Ajouter un serveur",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter"
+  },
+  "home": {
+    "hero": {
+      "title": "Trouvez votre communauté Discord parfaite",
+      "subtitle": "Explorez les serveurs Discord les mieux classés, connectez-vous avec des personnes partageant les mêmes centres d'intérêt et rejoignez des communautés dynamiques de jeux, d'art, de musique et plus encore.",
+      "viewTopServers": "Voir les meilleurs serveurs",
+      "searchServers": "Rechercher des serveurs"
+    }
+  },
+  "submit": {
+    "title": "Soumettre votre serveur",
+    "description": "Ajoutez votre serveur Discord à notre liste croissante et obtenez plus de membres. Toutes les soumissions sont automatiquement vérifiées par notre système d'IA.",
+    "form": {
+      "serverName": "Nom du serveur",
+      "serverIcon": "URL de l'icône du serveur",
+      "inviteLink": "Lien d'invitation Discord",
+      "shortDescription": "Description courte",
+      "fullDescription": "Description complète",
+      "categories": "Catégories",
+      "submit": "Soumettre le serveur"
+    }
+  }
+}
